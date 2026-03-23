@@ -1,0 +1,9 @@
+{
+  "project_name": "My Python Project",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
+  "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
+  "project_description": "A short description of the project",
+  "author_name": "David Conmy",
+  "python_version": "3.13",
+  "version": "0.1.0"
+}
