@@ -25,7 +25,7 @@ brew install uv
 Install the template with:
 
 ```bash
-uvx cookiecutter gh:ConmyMe/cookiecutter-python
+uvx cookiecutter gh:Conmy/cookiecutter-python
 ```
 
 ## Features

@@ -5,8 +5,7 @@
 ## Setup
 
 ```bash
-make venv
-make install-dev
+make init
 ```
 
 For further make commands, check out the [Makefile](Makefile)
