@@ -1,7 +1,7 @@
 PYTHON ?= python
 PACKAGE = {{ cookiecutter.package_name }}
 
-.PHONY: help install install-dev test lint format typecheck clean run venv
+.PHONY: help install install-dev test lint format typecheck clean run venv check
 
 help:
 	@echo "Targets:"
@@ -25,13 +25,15 @@ test:
 	uv run --active pytest
 
 lint:
-	uv run --active ruff check --active .
+	uv run --active ruff check .
 
 format:
-	uv run --active ruff check --active . --fix
+	uv run --active ruff check . --fix
 
 typecheck:
 	uv run --active mypy $(PACKAGE) tests
+
+check: typecheck lint test
 
 venv:
 	pyenv install -s {{ cookiecutter.python_version }}
