@@ -18,22 +18,22 @@ help:
 	@echo "  clean        Remove caches/build artifacts"
 
 install:
-	uv pip install .
+	pip install .
 
 install-dev:
-	uv pip install -e ".[dev]"
+	pip install -e ".[dev]"
 
 test:
-	uv run --active pytest
+	pytest
 
 lint:
-	uv run --active ruff check .
+	ruff check .
 
 format:
-	uv run --active ruff check . --fix
+	ruff check . --fix
 
 typecheck:
-	uv run --active mypy $(PACKAGE) tests
+	mypy $(PACKAGE) tests
 
 check: typecheck lint test
 
@@ -45,10 +45,10 @@ venv:
 venv-delete:
 	pyenv virtualenv-delete {{ cookiecutter.project_slug }}
 
-init: venv
+init: venv install-dev
 
 run:
-	uv run $(PACKAGE).main
+	python $(PACKAGE)/main.py
 
 clean:
 	rm -rf .pytest_cache .mypy_cache .ruff_cache build dist *.egg-info
