@@ -5,7 +5,7 @@
 ## Setup
 
 ```bash
-make venv # If using pyenv virtual env
+make venv
 make install-dev
 ```
 
