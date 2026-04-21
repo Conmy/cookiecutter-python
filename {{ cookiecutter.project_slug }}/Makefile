@@ -31,7 +31,7 @@ format:
 	uv run ruff check . --fix
 
 typecheck:
-	uv run mypy src tests
+	uv run mypy $(PACKAGE) tests
 
 venv:
 	pyenv install -s {{ cookiecutter.python_version }}
