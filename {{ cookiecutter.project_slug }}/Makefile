@@ -16,10 +16,10 @@ help:
 	@echo "  clean        Remove caches/build artifacts"
 
 install:
-	$(PYTHON) -m pip install .
+	uv install
 
 install-dev:
-	$(PYTHON) -m pip install -e ".[dev]"
+	uv install --dev
 
 test:
 	pytest
@@ -33,13 +33,8 @@ format:
 typecheck:
 	mypy src tests
 
-venv:
-	pyenv install -s {{ cookiecutter.python_version }}
-	pyenv virtualenv {{ cookiecutter.python_version }} {{ cookiecutter.project_slug }}
-	pyenv local {{ cookiecutter.project_slug }}
-
 run:
-	$(PYTHON) -m $(PACKAGE).main
+	uv run src/main.py
 
 clean:
 	rm -rf .pytest_cache .mypy_cache .ruff_cache build dist *.egg-info
