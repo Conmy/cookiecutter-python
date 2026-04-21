@@ -22,16 +22,16 @@ install-dev:
 	uv pip install -e ".[dev]"
 
 test:
-	uv run pytest
+	uv run --active pytest
 
 lint:
-	uv run ruff check .
+	uv run --active ruff check --active .
 
 format:
-	uv run ruff check . --fix
+	uv run --active ruff check --active . --fix
 
 typecheck:
-	uv run mypy $(PACKAGE) tests
+	uv run --active mypy $(PACKAGE) tests
 
 venv:
 	pyenv install -s {{ cookiecutter.python_version }}
