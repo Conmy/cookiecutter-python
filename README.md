@@ -30,7 +30,7 @@ uvx cookiecutter gh:Conmy/cookiecutter-python
 
 ## Features
 
-- src/ layout for safe imports
+- {{package_name}}/ layout for safe imports
 - dev dependencies via pyproject.toml
 - Makefile for common tasks
 
@@ -39,6 +39,7 @@ uvx cookiecutter gh:Conmy/cookiecutter-python
 | Variable | Description |
 | -- | -- |
 | project_slug | Project directory name |
+| package_name | Python friendly name |
 | python_version | Python version via pyenv |
 
 ## Generated Structure
@@ -47,6 +48,6 @@ uvx cookiecutter gh:Conmy/cookiecutter-python
 my-project/
 ├── pyproject.toml
 ├── Makefile
-├── src/
+├── {{package_name}}/
 └── tests/
 ```

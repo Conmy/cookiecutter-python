@@ -1,51 +1,42 @@
 PYTHON ?= python
 PACKAGE = {{ cookiecutter.package_name }}
 
-.PHONY: help init install install-dev test lint format typecheck clean run venv check venv-delete
+.PHONY: help init install test lint format typecheck clean run venv check unit
 
 help:
 	@echo "Targets:"
 	@echo "  init         Initialize the project with make"
 	@echo "  install      Install package"
-	@echo "  install-dev  Install package with dev dependencies"
 	@echo "  test         Run tests"
+	@echo "  unit         Run unit tests"
 	@echo "  lint         Run ruff checks"
 	@echo "  format       Format with ruff"
 	@echo "  typecheck    Run mypy"
 	@echo "  venv         Setup virtualenv using pyenv"
-	@echo "  venv-delete  Delete the venv, if it exists"
 	@echo "  run          Run example entrypoint"
 	@echo "  clean        Remove caches/build artifacts"
 
 install:
-	pip install .
-
-install-dev:
-	pip install -e ".[dev]"
-
-test:
-	pytest
+	uv pip install -e ".[dev]"
 
 lint:
-	ruff check .
-
-format:
-	ruff check . --fix
+	uv run --active ruff check .
 
 typecheck:
-	mypy $(PACKAGE) tests
+	uv run --active mypy $(PACKAGE) tests
 
-check: typecheck lint test
+unit:
+	uv pytest
+
+test: lint typecheck unit
+
+format:
+	uv run --active ruff check . --fix
 
 venv:
-	pyenv install -s {{ cookiecutter.python_version }}
-	pyenv virtualenv {{ cookiecutter.python_version }} {{ cookiecutter.project_slug }}
-	pyenv local {{ cookiecutter.project_slug }}
+	./scripts/clean_venv.sh
 
-venv-delete:
-	pyenv virtualenv-delete {{ cookiecutter.project_slug }}
-
-init: venv install-dev
+init: venv install
 
 run:
 	python $(PACKAGE)/main.py
